@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect><x>0</x><y>0</y><width>1100</width><height>750</height></rect>
+  </property>
+  <property name="windowTitle"><string>Стенд электропривода</string></property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="rootLayout">
+    <property name="leftMargin"><number>10</number></property>
+    <property name="topMargin"><number>10</number></property>
+    <property name="rightMargin"><number>10</number></property>
+    <property name="bottomMargin"><number>10</number></property>
+
+    <!-- ЛЕВАЯ ПАНЕЛЬ -->
+    <item>
+     <layout class="QVBoxLayout" name="leftPanel">
+
+      <!-- Джойстик -->
+      <item>
+       <widget class="QGroupBox" name="grpJoystick">
+        <property name="title"><string>Джойстик</string></property>
+        <layout class="QVBoxLayout">
+         <item><widget class="QLabel" name="lblJoyStatus"><property name="text"><string>Не подключён</string></property></widget></item>
+         <item><widget class="QLabel" name="lblAxis1"><property name="text"><string>Ось Y: -</string></property></widget></item>
+         <item><widget class="QProgressBar" name="barAxis1"><property name="minimum"><number>0</number></property><property name="maximum"><number>200</number></property><property name="value"><number>100</number></property><property name="textVisible"><bool>false</bool></property></widget></item>
+         <item><widget class="QLabel" name="lblButtons"><property name="text"><string>Кнопки: -</string></property></widget></item>
+         <item><widget class="QLabel" name="lblSpeedLock"><property name="text"><string>Скорость: свободна</string></property></widget></item>
+        </layout>
+       </widget>
+      </item>
+
+      <!-- Двигатель 1 -->
+      <item>
+       <widget class="QGroupBox" name="grpMotor1">
+        <property name="title"><string>Двигатель 1 (921600 бод)</string></property>
+        <layout class="QVBoxLayout">
+         <item><widget class="QLabel" name="lblPort1Status"><property name="text"><string>Не подключён</string></property></widget></item>
+         <item>
+          <layout class="QHBoxLayout">
+           <item><widget class="QComboBox" name="comboPorts1"/></item>
+           <item><widget class="QPushButton" name="btnRefreshPorts"><property name="text"><string>Обновить</string></property></widget></item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout">
+           <item><widget class="QPushButton" name="btnConnect1"><property name="text"><string>Подключить</string></property></widget></item>
+           <item><widget class="QPushButton" name="btnDisconnect1"><property name="text"><string>Отключить</string></property><property name="enabled"><bool>false</bool></property></widget></item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+
+      <!-- Двигатель 2 -->
+      <item>
+       <widget class="QGroupBox" name="grpMotor2">
+        <property name="title"><string>Двигатель 2 (921600 бод)</string></property>
+        <layout class="QVBoxLayout">
+         <item><widget class="QLabel" name="lblPort2Status"><property name="text"><string>Не подключён</string></property></widget></item>
+         <item>
+          <layout class="QHBoxLayout">
+           <item><widget class="QComboBox" name="comboPorts2"/></item>
+           <item><widget class="QPushButton" name="btnRefreshPorts2"><property name="text"><string>Обновить</string></property></widget></item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout">
+           <item><widget class="QPushButton" name="btnConnect2"><property name="text"><string>Подключить</string></property></widget></item>
+           <item><widget class="QPushButton" name="btnDisconnect2"><property name="text"><string>Отключить</string></property><property name="enabled"><bool>false</bool></property></widget></item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+
+      <!-- Журнал -->
+      <item>
+       <widget class="QGroupBox" name="grpLog">
+        <property name="title"><string>Журнал событий</string></property>
+        <layout class="QVBoxLayout">
+         <item><widget class="QTextEdit" name="logView"><property name="readOnly"><bool>true</bool></property></widget></item>
+        </layout>
+       </widget>
+      </item>
+
+     </layout>
+    </item>
+
+    <!-- ПРАВАЯ ПАНЕЛЬ -->
+    <item>
+     <layout class="QVBoxLayout" name="rightPanel">
+
+      <!-- Режимы работы -->
+      <item>
+       <widget class="QGroupBox" name="grpModes">
+        <property name="title"><string>Режим работы</string></property>
+        <layout class="QVBoxLayout">
+         <item>
+          <widget class="QRadioButton" name="rbMode1">
+           <property name="text"><string>Режим 1 — двигатели в одном направлении</string></property>
+           <property name="checked"><bool>true</bool></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="rbMode2">
+           <property name="text"><string>Режим 2 — двигатели в противоположном направлении</string></property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QRadioButton" name="rbMode3">
+           <property name="text"><string>Режим 3 — ручное задание скорости</string></property>
+          </widget>
+         </item>
+
+         <!-- Панель режима 3 -->
+         <item>
+          <widget class="QWidget" name="panelMode3">
+           <property name="visible"><bool>false</bool></property>
+           <layout class="QHBoxLayout">
+            <property name="leftMargin"><number>0</number></property>
+            <property name="rightMargin"><number>0</number></property>
+            <property name="topMargin"><number>0</number></property>
+            <property name="bottomMargin"><number>0</number></property>
+            <item>
+             <layout class="QVBoxLayout">
+              <item><widget class="QLabel"><property name="text"><string>Двигатель 1 (об/мин):</string></property></widget></item>
+              <item><widget class="QSpinBox" name="spinSpeedM1"><property name="minimum"><number>-420</number></property><property name="maximum"><number>420</number></property><property name="value"><number>0</number></property><property name="singleStep"><number>10</number></property></widget></item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout">
+              <item><widget class="QLabel"><property name="text"><string>Двигатель 2 (об/мин):</string></property></widget></item>
+              <item><widget class="QSpinBox" name="spinSpeedM2"><property name="minimum"><number>-420</number></property><property name="maximum"><number>420</number></property><property name="value"><number>0</number></property><property name="singleStep"><number>10</number></property></widget></item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout">
+              <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property><property name="sizeHint" stdset="0"><size><width>20</width><height>20</height></size></property></spacer></item>
+              <item><widget class="QPushButton" name="btnApplyMode3"><property name="text"><string>Применить</string></property></widget></item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </item>
+
+        </layout>
+       </widget>
+      </item>
+
+      <!-- Управление -->
+      <item>
+       <widget class="QGroupBox" name="grpControl">
+        <property name="title"><string>Управление</string></property>
+        <layout class="QVBoxLayout">
+         <item>
+          <layout class="QHBoxLayout">
+           <item><widget class="QPushButton" name="btnStart"><property name="text"><string>СТАРТ</string></property></widget></item>
+           <item><widget class="QPushButton" name="btnStop"><property name="text"><string>СТОП</string></property></widget></item>
+          </layout>
+         </item>
+         <item><widget class="QCheckBox" name="chkEnable"><property name="text"><string>Разрешить управление джойстиком</string></property></widget></item>
+        </layout>
+       </widget>
+      </item>
+
+      <!-- Шкалы скорости -->
+      <item>
+       <widget class="QGroupBox" name="grpSpeeds">
+        <property name="title"><string>Скорость двигателей</string></property>
+        <layout class="QHBoxLayout">
+         <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+         <item>
+          <layout class="QVBoxLayout">
+           <item><widget class="QLabel"><property name="text"><string>Двигатель 1</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+           <item>
+            <layout class="QHBoxLayout">
+             <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+             <item><widget class="QProgressBar" name="barSpeed1"><property name="minimum"><number>0</number></property><property name="maximum"><number>100</number></property><property name="value"><number>50</number></property><property name="orientation"><enum>Qt::Vertical</enum></property><property name="minimumHeight"><number>200</number></property><property name="minimumWidth"><number>60</number></property><property name="maximumWidth"><number>60</number></property></widget></item>
+             <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+            </layout>
+           </item>
+           <item><widget class="QLabel" name="lblSpeed1"><property name="text"><string>0 об/мин</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+          </layout>
+         </item>
+         <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+         <item>
+          <layout class="QVBoxLayout">
+           <item><widget class="QLabel"><property name="text"><string>Двигатель 2</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+           <item>
+            <layout class="QHBoxLayout">
+             <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+             <item><widget class="QProgressBar" name="barSpeed2"><property name="minimum"><number>0</number></property><property name="maximum"><number>100</number></property><property name="value"><number>50</number></property><property name="orientation"><enum>Qt::Vertical</enum></property><property name="minimumHeight"><number>200</number></property><property name="minimumWidth"><number>60</number></property><property name="maximumWidth"><number>60</number></property></widget></item>
+             <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+            </layout>
+           </item>
+           <item><widget class="QLabel" name="lblSpeed2"><property name="text"><string>0 об/мин</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+          </layout>
+         </item>
+         <item><spacer><property name="orientation"><enum>Qt::Horizontal</enum></property></spacer></item>
+        </layout>
+       </widget>
+      </item>
+
+      <item><spacer><property name="orientation"><enum>Qt::Vertical</enum></property></spacer></item>
+     </layout>
+    </item>
+
+   </layout>
+  </widget>
+ </widget>
+</ui>
